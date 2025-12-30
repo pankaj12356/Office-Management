@@ -1,0 +1,321 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Glassmorphism card style */
+    .glass-card {
+      width: 300px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      color: #fff;
+      padding: 10px;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .glass-card:hover {
+      transform: translateY(-6px);
+    }
+    .glass-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .glass-info {
+      padding: 16px;
+      text-align: center;
+    }
+    .glass-info h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .glass-info p {
+      margin: 4px 0 12px;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .glass-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px 16px;
+    }
+    .tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.25);
+    }
+    .btn {
+      border: none;
+      background: #ffffff;
+      color: #111;
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background: #e5e7eb;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gradient-to-b from-indigo-600 to-indigo-800 text-white flex flex-col">
+      <div class="p-6 text-2xl font-bold border-b border-indigo-500">Admin Dashboard</div>
+      <nav class="flex-1 p-4 space-y-2">
+        <a href="#" class="block py-2 px-4 rounded hover:bg-indigo-700">🏠 Dashboard</a>
+        <a href="#" class="block py-2 px-4 rounded hover:bg-indigo-700">👥 Users</a>
+        <a href="#" class="block py-2 px-4 rounded hover:bg-indigo-700">📋 Tasks</a>
+        <a href="#" class="block py-2 px-4 rounded hover:bg-indigo-700">⚙️ Settings</a>
+      </nav>
+      <div class="p-4 border-t border-indigo-500">
+        <button class="w-full py-2 bg-red-500 rounded hover:bg-red-600">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col">
+      <!-- Top Navbar -->
+      <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold">User Management</h1>
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-600">admin@gmail.com</span>
+          <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-full border-2 border-indigo-600" />
+        </div>
+      </header>
+
+      <!-- User Table -->
+      <section class="p-6">
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <table class="min-w-full">
+            <thead class="bg-indigo-600 text-white">
+              <tr>
+                <th class="py-3 px-4 text-left">Name</th>
+                <th class="py-3 px-4 text-left">Email</th>
+                <th class="py-3 px-4 text-left">Role</th>
+                <th class="py-3 px-4 text-left">Profile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b">
+                <td class="py-3 px-4">Prem</td>
+                <td class="py-3 px-4">prem@gmail.com</td>
+                <td class="py-3 px-4 text-green-600">Admin</td>
+                <td class="py-3 px-4">
+                  <button class="text-indigo-600 underline hover:text-indigo-800"
+                    onclick="showCard('Prem','prem@gmail.com','Admin','https://res.cloudinary.com/db3cvdydp/image/upload/v1766480747/profiles/jq4ocjqcbcmhkp8hf6m4.png')">
+                    Show Details
+                  </button>
+                </td>
+              </tr>
+              <tr class="border-b">
+                <td class="py-3 px-4">Ravi</td>
+                <td class="py-3 px-4">ravi@gmail.com</td>
+                <td class="py-3 px-4 text-blue-600">User</td>
+                <td class="py-3 px-4">
+                  <button class="text-indigo-600 underline hover:text-indigo-800"
+                    onclick="showCard('Ravi','ravi@gmail.com','User','https://res.cloudinary.com/db3cvdydp/image/upload/v1766480747/profiles/jq4ocjqcbcmhkp8hf6m4.png')">
+                    Show Details
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4">Anita</td>
+                <td class="py-3 px-4">anita@gmail.com</td>
+                <td class="py-3 px-4 text-yellow-600">User</td>
+                <td class="py-3 px-4">
+                  <button class="text-indigo-600 underline hover:text-indigo-800"
+                    onclick="showCard('Anita','anita@gmail.com','User','https://res.cloudinary.com/db3cvdydp/image/upload/v1766480747/profiles/jq4ocjqcbcmhkp8hf6m4.png')">
+                    Show Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Glassmorphism Card Modal -->
+  <div id="cardModal" class="fixed inset-0 bg-indigo-900 bg-opacity-60 hidden flex items-center justify-center">
+    <div class="glass-card">
+      <!-- Indigo Close Button inside card -->
+      <button class="absolute top-2 right-2 text-indigo-600 hover:text-indigo-800 font-bold"
+              onclick="closeCard()">✖</button>
+      <img id="cardImage" src="" alt="User Image" />
+      <div class="glass-info">
+        <h3 id="cardName"></h3>
+        <p id="cardEmail"></p>
+      </div>
+      <div class="glass-actions">
+        <span id="cardRole" class="tag"></span>
+        <button class="btn">Follow</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showCard(name, email, role, imageUrl) {
+      document.getElementById("cardName").innerText = name;
+      document.getElementById("cardEmail").innerText = email;
+      document.getElementById("cardRole").innerText = role;
+      document.getElementById("cardImage").src = imageUrl;
+      document.getElementById("cardModal").classList.remove("hidden");
+    }
+    function closeCard() {
+      document.getElementById("cardModal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoderzHub Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-indigo-700 text-white flex flex-col">
+    <div class="p-6 text-center border-b border-indigo-600">
+      <h1 class="text-2xl font-bold">CoderzHub</h1>
+    </div>
+    <nav class="flex-1 p-4 space-y-2 text-sm">
+      <a href="#" class="block px-3 py-2 rounded hover:bg-indigo-600">📋 Tasks</a>
+      <a href="#" class="block px-3 py-2 rounded hover:bg-indigo-600">👥 Users</a>
+      <a href="#" class="block px-3 py-2 rounded hover:bg-indigo-600">📊 Overview</a>
+      <a href="#" class="block px-3 py-2 rounded hover:bg-indigo-600">🗂️ Reports</a>
+      <a href="#" class="block px-3 py-2 rounded hover:bg-indigo-600">⚙️ Settings</a>
+    </nav>
+    <div class="p-4 border-t border-indigo-600">
+      <div class="flex items-center space-x-3">
+        <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full border-2 border-white object-cover" />
+        <div>
+          <p class="text-sm font-semibold">Pankaj</p>
+          <p class="text-xs text-indigo-200">admin</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 space-y-6">
+
+    <!-- Top Bar -->
+    <div class="flex justify-between items-center">
+      <h2 class="text-xl font-bold text-indigo-700">Dashboard Overview</h2>
+      <input type="text" placeholder="Search..." class="px-4 py-2 rounded border border-gray-300 w-64" />
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <h3 class="text-sm text-gray-500">Total Users</h3>
+        <p class="text-2xl font-bold text-indigo-700">19</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <h3 class="text-sm text-gray-500">Available Staff</h3>
+        <p class="text-2xl font-bold text-green-600">7</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <h3 class="text-sm text-gray-500">Avg Task Time</h3>
+        <p class="text-2xl font-bold text-yellow-600">2.5 hrs</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 text-center">
+        <h3 class="text-sm text-gray-500">Active Projects</h3>
+        <p class="text-2xl font-bold text-purple-600">3</p>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-xl shadow p-6">
+        <h3 class="text-indigo-700 font-bold mb-4">Task Status Distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="bg-white rounded-xl shadow p-6">
+        <h3 class="text-indigo-700 font-bold mb-4">Tasks Over Time</h3>
+        <canvas id="tasksChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="bg-white rounded-xl shadow p-6">
+      <h3 class="text-indigo-700 font-bold mb-4">Tasks by Division</h3>
+      <table class="w-full text-sm text-left text-gray-700">
+        <thead>
+          <tr class="bg-indigo-100 text-indigo-700">
+            <th class="px-4 py-2">Division</th>
+            <th class="px-4 py-2">Tasks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-4 py-2">Frontend</td>
+            <td class="px-4 py-2">12</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Backend</td>
+            <td class="px-4 py-2">18</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Design</td>
+            <td class="px-4 py-2">7</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Chart.js Scripts -->
+  <script>
+    new Chart(document.getElementById('statusChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Pending', 'Inwork', 'Completed'],
+        datasets: [{
+          data: [10, 15, 17],
+          backgroundColor: ['#f87171', '#facc15', '#4ade80'],
+        }]
+      }
+    });
+
+    new Chart(document.getElementById('tasksChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb'],
+        datasets: [{
+          label: 'Tasks Created',
+          data: [5, 12, 9, 15, 20],
+          backgroundColor: '#4f46e5',
+        }]
+      }
+    });
+  </script>
+
+</body>
+</html> -->
